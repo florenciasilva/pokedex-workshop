@@ -1,0 +1,44 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: Arial;
+}
+
+.pokedex {
+    background-color: #ff0464;
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Flex para componentes, Grid para layour */
+
+.pantalla {
+    background: #95c594;
+    border: 15px solid white;
+    height: 200px;
+    /*padding-top: 33.3px;*/
+    box-sizing: border-box;
+    display: flex;
+    align-items: center; /* alinea verticalmente si la dirección está en fila*/
+    flex-direction: 'row';
+    justify-content: center;
+}
+
+/* El Modelo de caja en CSS es formado por: Alto, Ancho, Border, Padding y Margin */
+.nombre {
+    font-size: 40px;
+}
+
+.nombre::first-letter {
+    text-transform: uppercase;
+}
+.loader.hidden {
+    display: none;
+}
+/*img.loader {
+    Recorta la imagen al width y height especificado
+    object-fit:  none;
+}*/

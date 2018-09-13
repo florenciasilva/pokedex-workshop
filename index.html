@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Promises, Fetch, Async Await</title>
+</head>
+
+<body>
+    
+    <div class="pokedex">
+        <div class="pantalla">
+            <img class="loader hidden" id="loader" src="https://i.giphy.com/media/l4FGKbWgkhHVGXzTW/giphy.webp" width="70" height="70">
+            <img src="lol" alt="" id="pokemon-image">
+        </div>
+            <p id="pokemon" class="nombre"></p>
+            <form id="form">
+                <input type="text" name="pokemon">
+                <button>Buscar</button>
+            </form>
+    </div>
+
+    <script>
+        //Eventos
+        //Los eventos son las reacciones a las acciones que ejecuta el usuario
+        const $loader = document.getElementById('loader');    
+        const buscarPokemon = async (event) => {
+            event.preventDefault();
+            $loader.classList.remove('hidden');
+            $pokemonImage.style.display = 'none';
+            const form = new FormData($form);
+            const pokemonName = form.get('pokemon');
+            const pokemonData = await getPokemon(pokemonName);
+            buildPokemon(pokemonData, $pokemon, $pokemonImage, $loader);
+        }
+    // Fetch es el API del browser que nos ayuda a interactuar con datos
+        const $form = document.getElementById('form');
+        $form.addEventListener('submit', buscarPokemon)
+        const $pokemon = document.getElementById('pokemon');
+        const $pokemonImage = document.getElementById('pokemon-image');
+        
+        const buildPokemon = (pokemon, $nameContainer, $imageContainer) => {
+            $imageContainer.style.display = 'block';
+            $nameContainer.innerHTML = pokemon.name;
+            $imageContainer.setAttribute('src', pokemon.sprites.front_default);
+            $loader.classList.add('hidden');
+        }
+
+        const getPokemon = async (pokemonId) => {
+            const respuesta = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
+            const pokemon = await respuesta.json();
+            return pokemon;
+            }
+
+       /* let nombre = 'blah'
+        function apellido() {
+            let apellido = 'bleh';
+            setTimeout(function() {
+                let segundoApellido = 'Leh';
+                let nombreCompleto = nombre + ' ' + apellido + ' ' + segundoApellido;
+                console.log(nombreCompleto)
+            }, 1000);
+        }
+        setTimeout(apellido, 1000)
+        
+        // Callbacks
+        // Un callback es una función que es parametro de otra función.
+
+        // Promises
+        let tiempo = 11;
+        let promesa = new Promise(function(todoBien, todoMal) {
+            if (tiempo === 11) {
+                todoBien();
+            } else {
+                todoMal();
+                }
+            }).then(function(){
+            console.log('Bien')
+            }).catch(function() {
+            console.log('Mal');
+            })
+*/
+    </script>
+</body>
+</html>
